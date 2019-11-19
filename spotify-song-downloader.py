@@ -17,13 +17,13 @@ url = urllib.parse.quote(url)
 
 
 PARAMS = {
-    'Host':'spotify-downloader.ml',
+    'Host':'https://spotify-downloader.ml',
     'q':url,
           }
 os.system('clear')
 
 
-r = requests.post(url = 'http://spotify-downloader.ml/index.php', data = PARAMS)
+r = requests.post(url = 'https://spotify-downloader.ml/index.php', data = PARAMS)
 
 
 
@@ -43,7 +43,7 @@ if(ind == -1 or indlast == -1):
 
 downloadlink =   downloadpage[ind:indlast + 4]
 
-download = 'http://spotify-downloader.ml' + downloadlink
+download = 'https://spotify-downloader.ml/' + downloadlink
 
 print(download)
 
