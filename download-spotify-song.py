@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import sys,os
 import urllib.parse
 import requests 
@@ -15,30 +16,41 @@ url = url.split("?")[0]
 url = urllib.parse.quote(url)
 
 
-
 PARAMS = {
-    'Host':'spotify-downloader.ml',
+    'Host':'https://spotify-downloader.ml',
     'q':url,
           }
+os.system('clear')
 
-r = requests.post(url = 'http://spotify-downloader.ml/index.php', data = PARAMS)
+
+r = requests.post(url = 'https://spotify-downloader.ml/index.php', data = PARAMS)
+
+
 
 downloadpage = r.text 
 
 
 ind = downloadpage.find('/music/')
 
+
+
 indlast  = downloadpage.find('.mp3',ind)
+
+if(ind == -1 or indlast == -1):
+
+    print("The given link is must be of valid song (Playlist's are not downloadable)")
+    exit()
 
 downloadlink =   downloadpage[ind:indlast + 4]
 
-download = 'http://spotify-downloader.ml' + downloadlink
+download = 'https://spotify-downloader.ml/' + downloadlink
 
-
+print(download)
 
 filename = os.path.basename(download)
 
 directory = os.getcwd()
-
-wget.download(download, directory + '/' + filename)
-
+try:
+    wget.download(download, directory + '/' + filename)    
+finally:
+    print("Fail to download")
