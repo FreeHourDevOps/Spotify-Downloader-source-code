@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import sys,os
 import urllib.parse
 import requests 
@@ -6,15 +7,17 @@ from urllib.request import urlopen
 from bs4 import BeautifulSoup
 import threading
 
+
+
 def downloadsong(url):
     PARAMS = {
-        'Host':'spotify-downloader.ml',
+        'Host':'https://spotify-downloader.ml',
         'q':url,
             }
     
 
 
-    r = requests.post(url = 'http://spotify-downloader.ml/index.php', data = PARAMS)
+    r = requests.post(url = 'https://spotify-downloader.ml/index.php', data = PARAMS)
 
 
 
@@ -29,12 +32,12 @@ def downloadsong(url):
 
     if(ind == -1 or indlast == -1):
 
-        print("The given link is must be of valid song (Playlist's are not downloadable)")
+        print("Some Songs from Playlist are now downloadable")
         exit()
 
     downloadlink =   downloadpage[ind:indlast + 4]
 
-    download = 'http://spotify-downloader.ml' + downloadlink
+    download = 'https://spotify-downloader.ml/' + downloadlink
 
     
 
@@ -47,7 +50,11 @@ def downloadsong(url):
         print()
     print('\n successfully downloaded: '+filename)
 
+
+
 os.system('clear')
+
+
 
 try:
     purl =  sys.argv[1]
@@ -71,7 +78,8 @@ for link in data:
     if(link.find(common)!= -1):
         songs.append(link)
 
-print("\nwait a sec we generating download links for you........")
+print("\n Wait a sec,we generating download links for you")
 for url in songs:
-    thread = threading.Thread(target=downloadsong, args=(url,)) 
+    thread = threading.Thread(target=downloadsong, args=(url,))
     thread.start()
+
